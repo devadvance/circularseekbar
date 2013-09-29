@@ -16,6 +16,21 @@ In order to use the CircularSeekBar, you need to do two things.
 
 <h3>Add Source Files to Project</h3>
 
+There are two files you need to include:
+-CircularSeekBar.java
+-attrs.xml
+
+Place the attrs.xml file inside of your res/values directory.
+	
+	../yourprojectdir/res/values/attrs.xml
+
+Place CircularSeekBar.java inside of the src folder with the entire directory structure included:
+
+	../yourprojectdir/src/com/devadvance/circularseekbar/CircularSeekBar.java
+
+To use any methods inside if your classes, you must import the correct file. Add this to any classes you want to programmatically use the CircularSeekBar in:
+
+	import com.devadvance.circularseekbar.CircularSeekBar;
 
 <h3>Add CircularSeekBar to Your Layout</h3>
 
@@ -66,7 +81,11 @@ To use the CircularSeekBar programmatically, you can treat it like a normal Seek
 	seekbar.getProgress();
 	seekbar.setProgress(50);
 
-To use the listener to detect progress changes, first create a listener that implements the OnCircularSeekBarChangeListener:
+To use the listener to detect progress changes, first add the import for the class at the top of your file:
+	
+	import com.devadvance.circularseekbar.CircularSeekBar.OnCircularSeekBarChangeListener;
+
+Next, create a listener that implements the OnCircularSeekBarChangeListener:
 
 	public class CircleSeekBarListener implements OnCircularSeekBarChangeListener {
 		@Override
@@ -84,39 +103,39 @@ Then create a new instance of it and set it for your seekbar:
 
 Available Attributes:
 
-progress - Integer Value.
+<b>progress</b> - Integer Value.
 
-max - Integer Value.
+<b>max</b> - Integer Value.
 
-start_angle - Decimal Value. Start angle of the circle. Angles are relative to 3 o'clock (positive X axis).
+<b>start_angle</b> - Decimal Value. Start angle of the circle. Angles are relative to 3 o'clock (positive X axis).
 
-end_angle - Decimal Value. End angle of the circle. Angles are relative to 3 o'clock (positive X axis).
+<b>end_angle</b> - Decimal Value. End angle of the circle. Angles are relative to 3 o'clock (positive X axis).
 
-maintain_equal_circle - True/False. This controls whether or not an ellipse shape is available. Ellipses are not accurate in terms of representing progress, so be aware of that when you set this to false. Default value is true.
+<b>maintain_equal_circle</b> - True/False. This controls whether or not an ellipse shape is available. Ellipses are not accurate in terms of representing progress, so be aware of that when you set this to false. Default value is true.
 
-use_custom_radii - True/False. If true, then you can specify radii using attributes. No matter what is specified, they will not exceed the bounds of the View itself. If false, then the View size (android:layout_width and android:layout_height) is used.
+<b>use_custom_radii</b> - True/False. If true, then you can specify radii using attributes. No matter what is specified, they will not exceed the bounds of the View itself. If false, then the View size (android:layout_width and android:layout_height) is used.
 
-circle_x_radius - Decimal Value. Custom X radius in DP.. Requires use_custom_radii to be true.
+<b>circle_x_radius</b> - Decimal Value. Custom X radius in DP.. Requires use_custom_radii to be true.
 
-circle_y_radius - Decimal Value. Custom Y radius in DP. Requires use_custom_radii to be true.
+<b>circle_y_radius</b> - Decimal Value. Custom Y radius in DP. Requires use_custom_radii to be true.
 
-circle_stroke_width - Decimal Value. Defines the width of the circle ring in DP.
+<b>circle_stroke_width</b> - Decimal Value. Defines the width of the circle ring in DP.
 
-pointer_radius - Decimal Value. Defines the radius of the pointer in DP.
+<b>pointer_radius</b> - Decimal Value. Defines the radius of the pointer in DP.
 
-pointer_halo_width - Decimal Value. Defines the width of the pointer halo in DP. Note: This is NOT a radius; it is in addition to the pointer radius.
+<b>pointer_halo_width</b> - Decimal Value. Defines the width of the pointer halo in DP. Note: This is NOT a radius; it is in addition to the pointer radius.
 
-pointer_halo_border_width - Decimal Value. Defines the width of the pointer halo border in DP. Note: This is NOT a radius; it is in addition to the pointer radius. The border shows up when the user is touching the CircularSeekBar.
+<b>pointer_halo_border_width</b> - Decimal Value. Defines the width of the pointer halo border in DP. Note: This is NOT a radius; it is in addition to the pointer radius. The border shows up when the user is touching the CircularSeekBar.
 
-circle_color - String value. Hex color value, can be #RRGGBB or #AARRGGBB (where AA is the alpha value).
+<b>circle_color</b> - String value. Hex color value, can be #RRGGBB or #AARRGGBB (where AA is the alpha value).
 
-circle_progress_color - String value. Hex color value, can be #RRGGBB or #AARRGGBB (where AA is the alpha value).
+<b>circle_progress_color</b> - String value. Hex color value, can be #RRGGBB or #AARRGGBB (where AA is the alpha value).
 
-pointer_color - String value. Hex color value, can be #RRGGBB or #AARRGGBB (where AA is the alpha value).
+<b>pointer_color</b> - String value. Hex color value, can be #RRGGBB or #AARRGGBB (where AA is the alpha value).
 
-pointer_halo_color - String value. Hex color value, can be #RRGGBB or #AARRGGBB (where AA is the alpha value). If no alpha is included, it defaults to 200 (out of 255).
+<b>pointer_halo_color</b> - String value. Hex color value, can be #RRGGBB or #AARRGGBB (where AA is the alpha value). If no alpha is included, it defaults to 200 (out of 255).
 
-pointer_alpha_ontouch - Integer value. When the user touches the CircularSeekBar, the opacity/alpha of the pointer halo changes to this value. Defaults to 100 (out of 255).
+<b>pointer_alpha_ontouch</b> - Integer value. When the user touches the CircularSeekBar, the opacity/alpha of the pointer halo changes to this value. Defaults to 100 (out of 255).
 	
 <h2>License</h2>
 	
