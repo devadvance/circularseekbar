@@ -11,6 +11,10 @@ This is a custom circular SeekBar. It can be used to create SeekBars that are:
 
 In addition, it is fully customizable via XML attributes, far beyond the default values.
 
+![Screenshot 1](https://lh3.googleusercontent.com/-1JEeXRNfhYc/Ukiy_myxcoI/AAAAAAAAJD0/k8nGDGxfg7k/w281-h500-no/1.png) ![Screenshot 2]https://lh6.googleusercontent.com/-mq64-hEt_KM/Ukiy_swcllI/AAAAAAAAJD8/jy7pyKaFAaQ/w281-h500-no/2.png)
+
+![Screenshot 3]https://lh6.googleusercontent.com/-amwGemq-PDQ/Ukiy_rP832I/AAAAAAAAJEE/BjKuqqQVzeQ/w281-h500-no/3.png) ![Screenshot 4]https://lh5.googleusercontent.com/-Mh-_AoEunxw/UkizAF-T5HI/AAAAAAAAJEI/tR0Sl5vCLVo/w281-h500-no/4.png)
+
 <h2>Documentation</h2>
 In order to use the CircularSeekBar, you need to do two things.
 
@@ -155,7 +159,9 @@ Available Attributes:
  	
  	
 <h2>Inspired and Guided By</h2>
+
 HoloCircleSeekBar - Copyright 2012 **Jesús Manzano**
+
 HoloColorPicker - Copyright 2012 **Lars Werkman (Designed by Marie Schweiz)**
 
 Although I did not used the code from either project directly, they were both used as reference material, and as a result, were extremely helpful.
