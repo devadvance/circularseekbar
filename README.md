@@ -4,10 +4,12 @@ CircularSeekBar
 <h2>Android CircularSeekBar Custom View/Widget</h2>
 
 This is a custom circular SeekBar. It can be used to create SeekBars that are:
+
 -Full Circles
 -Semi-Circles
 -Ellipses
 -Semi-Ellipses
+
 
 In addition, it is fully customizable via XML attributes, far beyond the default values.
 
@@ -16,9 +18,13 @@ In addition, it is fully customizable via XML attributes, far beyond the default
 This should work on Android 2.3+.
 
 Tested on:
+
 -HTC One Google Edition (Android 4.3)
+
 -Galaxy Nexus (Android 4.3)
+
 -Emulator with Android versions 2.3-4.2.
+
 
 Known Issues:
 -The glow effect around the progress part of the circle will not show up on Android 4.0+. This is due to the BlurMaskFilter not working when hardware acceleration is on. Android OS issue.
