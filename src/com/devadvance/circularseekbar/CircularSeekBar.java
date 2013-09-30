@@ -70,9 +70,9 @@ public class CircularSeekBar extends View {
 	private static final int DEFAULT_PROGRESS = 0;
 	private static final int DEFAULT_CIRCLE_COLOR = Color.DKGRAY;
 	private static final int DEFAULT_CIRCLE_PROGRESS_COLOR = Color.argb(235, 74, 138, 255);
-	private static final int DEFAULT_POINTER_COLOR = Color.CYAN;
-	private static final int DEFAULT_POINTER_HALO_COLOR = Color.DKGRAY;
-	private static final int DEFAULT_POINTER_ALPHA = 200;
+	private static final int DEFAULT_POINTER_COLOR = Color.argb(235, 74, 138, 255);
+	private static final int DEFAULT_POINTER_HALO_COLOR = Color.argb(135, 74, 138, 255);
+	private static final int DEFAULT_POINTER_ALPHA = 135;
 	private static final int DEFAULT_POINTER_ALPHA_ONTOUCH = 100;
 	private static final boolean DEFAULT_USE_CUSTOM_RADII = false;
 	private static final boolean DEFAULT_MAINTAIN_EQUAL_CIRCLE = true;
@@ -445,7 +445,8 @@ public class CircularSeekBar extends View {
 	 * @return The amount of progress in degrees
 	 */
 	private void calculateProgressDegrees() {
-		mProgressDegrees = (360f - (mStartAngle - mPointerPosition)) % 360f;
+		mProgressDegrees = mPointerPosition - mStartAngle; // Verified
+		mProgressDegrees = (mProgressDegrees < 0 ? 360f + mProgressDegrees : mProgressDegrees); // Verified
 	}
 	
 	/**
@@ -653,20 +654,16 @@ public class CircularSeekBar extends View {
 			if (mUserIsMovingPointer) {
 				if (lastCWDistanceFromStart < cwDistanceFromStart) {
 					if ((cwDistanceFromStart - lastCWDistanceFromStart) > 180f && !mIsMovingCW) {
-						Log.i("com.devadvance.circulartest", "111");
 						lockAtStart = true;
 						lockAtEnd = false;
 					} else {
 						mIsMovingCW = true;
-						Log.i("com.devadvance.circulartest", "222");
 					}
 				} else {
 					if ((lastCWDistanceFromStart - cwDistanceFromStart) > 180f && mIsMovingCW) {
-						Log.i("com.devadvance.circulartest", "333");
 						lockAtEnd = true;
 						lockAtStart = false;
 					} else {
-						Log.i("com.devadvance.circulartest", "444");
 						mIsMovingCW = false;
 					}
 				}
@@ -684,10 +681,13 @@ public class CircularSeekBar extends View {
 				if (lockAtEnd && mIsMovingCW && (cwDistanceFromEnd > 90)) {
 					lockAtEnd = false;
 				}
-				
-				Log.i("com.devadvance.circulartest", "lockAtEnd: " + lockAtEnd);
+				// Fix for passing the end of a semi-circle quickly
+				if (!lockAtEnd && cwDistanceFromStart > mTotalCircleDegrees && mIsMovingCW && lastCWDistanceFromStart < mTotalCircleDegrees) {
+					lockAtEnd = true;
+				}
 				
 				if (lockAtStart) {
+					// TODO: Add a check if mProgress is already 0, in which case don't call the listener
 					mProgress = 0;
 					recalculateAll();
 					invalidate();
@@ -703,13 +703,8 @@ public class CircularSeekBar extends View {
 					}
 				//} else if ((touchEventRadius >= innerRadius) && (touchEventRadius <= outerRadius)) {
 				} else if ((touchEventRadius <= outerRadius)) { // I think this way works better...but it might interfere with scrolling, have to check
-					if (cwDistanceFromStart > mTotalCircleDegrees) {
+					if (!(cwDistanceFromStart > mTotalCircleDegrees)) {
 						Log.i("com.devadvance.circulartest", "ABCCC: ");
-						if (mIsMovingCW) { // Make sure that you can hit max progress when moving fast
-							mProgress = mMax;
-						}
-					}
-					else {
 						setProgressBasedOnAngle(touchAngle);
 					}
 					recalculateAll();
@@ -718,7 +713,6 @@ public class CircularSeekBar extends View {
 						mOnCircularSeekBarChangeListener.onProgressChanged(this, mProgress, true);
 					}
 				} else {
-					Log.i("com.devadvance.circulartest", "here");
 					break;
 				}
 				

@@ -56,13 +56,13 @@ To use any methods inside if your classes, you must import the correct file. Add
 
 Start by adding this to the root of your layout xml file(s):
 
-	xmlns:circle="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res/com.devadvance.circulartest"
 
 After you add it, the root of your layout xml file(s) should look SIMILAR to this:
 
 	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:tools="http://schemas.android.com/tools"
-		xmlns:circle="http://schemas.android.com/apk/res-auto"
+		xmlns:app="http://schemas.android.com/apk/res/com.devadvance.circulartest"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent" >
 
@@ -75,16 +75,16 @@ To add the basic CircularSeekBar to your layout, add this to your layout xml fil
 
 For further configuration, such as color, sizes, and angle, you can specify many attributes associated with the CircularSeekBar, such as:
 	
-	circle:start_angle="270"
-	circle:end_angle="270"
-	circle:circle_x_radius="100"
-	circle:circle_y_radius="100"
-	circle:use_custom_radii="true"
-	circle:progress="25"
-	circle:max="100"
-	circle:pointer_alpha_ontouch="100"
-	circle:pointer_color="#0174DF"
-	circle:pointer_halo_color="#880174DF"
+	app:start_angle="270"
+	app:end_angle="270"
+	app:circle_x_radius="100"
+	app:circle_y_radius="100"
+	app:use_custom_radii="true"
+	app:progress="25"
+	app:max="100"
+	app:pointer_alpha_ontouch="100"
+	app:pointer_color="#0174DF"
+	app:pointer_halo_color="#880174DF"
 
 <b>Note: all sizes are measured in DEGREES or DP. No pixels are used.</b>
         
