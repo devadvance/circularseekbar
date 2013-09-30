@@ -705,6 +705,9 @@ public class CircularSeekBar extends View {
 				} else if ((touchEventRadius <= outerRadius)) { // I think this way works better...but it might interfere with scrolling, have to check
 					if (cwDistanceFromStart > mTotalCircleDegrees) {
 						Log.i("com.devadvance.circulartest", "ABCCC: ");
+						if (mIsMovingCW) { // Make sure that you can hit max progress when moving fast
+							mProgress = mMax;
+						}
 					}
 					else {
 						setProgressBasedOnAngle(touchAngle);
