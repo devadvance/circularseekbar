@@ -52,6 +52,15 @@ To use any methods inside if your classes, you must import the correct file. Add
 
 	import com.devadvance.circularseekbar.CircularSeekBar;
 
+You also need to add the import for the generated R class to the CircularSeekBar class. You need to change the top of the CircularSeekBar.java file to look like this:
+
+	package com.devadvance.circularseekbar;
+
+	import com.example.yourappname.R;
+
+where <b>"com.example.yourappname"</b> depends on your project/app. Eclipse *may* offer to add this import for you.
+
+
 <h3>Add CircularSeekBar to Your Layout</h3>
 
 Start by adding this to the root of your layout xml file(s):

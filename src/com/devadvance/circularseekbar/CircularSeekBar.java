@@ -27,8 +27,6 @@
 
 package com.devadvance.circularseekbar;
 
-import com.devadvance.circulartest.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.BlurMaskFilter;
@@ -550,7 +548,13 @@ public class CircularSeekBar extends View {
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		int height = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
 		int width = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
-		setMeasuredDimension(width, height);
+		if (mMaintainEqualCircle) {
+			int min = Math.min(width, height);
+			setMeasuredDimension(min, min);
+		} else {
+			setMeasuredDimension(width, height);
+		}
+		
 		
 		// Set the circle width and height based on the view for the moment
 		mCircleHeight = (float)height / 2f - mCircleStrokeWidth - mPointerRadius - (mPointerHaloBorderWidth * 1.5f);
