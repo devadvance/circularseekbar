@@ -6,8 +6,11 @@ CircularSeekBar
 This is a custom circular SeekBar. It can be used to create SeekBars that are:
 
 -Full Circles
+
 -Semi-Circles
+
 -Ellipses
+
 -Semi-Ellipses
 
 
