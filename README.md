@@ -18,15 +18,19 @@ In addition, it is fully customizable via XML attributes, far beyond the default
 
 <h2>Support and Testing</h2>
 
-This should work on Android 2.3+.
+Tested and working on Android 2.3+.
 
-Tested on:
+Tested on the following devices:
 
 -HTC One Google Edition (Android 4.3)
+
+-HTC One X (AT&T, Android 4.1)
 
 -Galaxy Nexus (Android 4.3)
 
 -Emulator with Android versions 2.3-4.2.
+
+CircularSeekBar has also been tested with normal scrolling. It was also been tested successfully with Fragments, as well as scrolling tabs + Fragments.
 
 
 Known Issues:
@@ -35,9 +39,9 @@ Known Issues:
 ![Screenshot 1](https://lh3.googleusercontent.com/-1JEeXRNfhYc/Ukiy_myxcoI/AAAAAAAAJD0/k8nGDGxfg7k/w281-h500-no/1.png)
 
 <h2>Documentation</h2>
-In order to use the CircularSeekBar, you need to do two things.
+In order to use the CircularSeekBar, you need to do three things.
 
-<h3>Add Source Files to Project</h3>
+<h3>1) Add Source Files to Project</h3>
 
 There are two files you need to include:
 -CircularSeekBar.java
@@ -50,6 +54,8 @@ Place the attrs.xml file inside of your res/values directory.
 Place CircularSeekBar.java inside of the src folder with the entire directory structure included:
 
 	../yourprojectdir/src/com/devadvance/circularseekbar/CircularSeekBar.java
+
+<h3>2) Customize Source Files</h3>
 
 To use any methods inside if your classes, you must import the correct file. Add this to any classes you want to programmatically use the CircularSeekBar in:
 
@@ -64,7 +70,7 @@ You also need to add the import for the generated R class to the CircularSeekBar
 where <b>"com.example.yourappname"</b> depends on your project/app. Eclipse *may* offer to add this import for you.
 
 
-<h3>Add CircularSeekBar to Your Layout</h3>
+<h3>3) Add CircularSeekBar to Your Layout</h3>
 
 Start by adding this to the root of your layout xml file(s):
 
