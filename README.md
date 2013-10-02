@@ -136,13 +136,15 @@ Available Attributes:
 
 <b>max</b> - Integer Value.
 
+<b>move_outside_circle</b> - True/False. Default is false. In the case that the user has already touched down on the CircularSeekBar and is adjusting the progress, this determines whether or not movement outside the circle is accepted and adjusted the progress.
+
 <b>start_angle</b> - Decimal Value. Start angle of the circle. Angles are relative to 3 o'clock (positive X axis).
 
 <b>end_angle</b> - Decimal Value. End angle of the circle. Angles are relative to 3 o'clock (positive X axis).
 
-<b>maintain_equal_circle</b> - True/False. This controls whether or not an ellipse shape is available. Ellipses are not accurate in terms of representing progress, so be aware of that when you set this to false. Default value is true.
+<b>maintain_equal_circle</b> - True/False. Default is true. This controls whether or not an ellipse shape is available. Ellipses are not accurate in terms of representing progress, so be aware of that when you set this to false. Default value is true.
 
-<b>use_custom_radii</b> - True/False. If true, then you can specify radii using attributes. No matter what is specified, they will not exceed the bounds of the View itself. If false, then the View size (android:layout_width and android:layout_height) is used.
+<b>use_custom_radii</b> - True/False. Default is false. If true, then you can specify radii using attributes. No matter what is specified, they will not exceed the bounds of the View itself. If false, then the View size (android:layout_width and android:layout_height) is used.
 
 <b>circle_x_radius</b> - Decimal Value. Custom X radius in DP.. Requires use_custom_radii to be true.
 
