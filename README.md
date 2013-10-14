@@ -228,3 +228,5 @@ Although I did not used the code from either project directly, they were both us
 ![Screenshot 3](https://lh6.googleusercontent.com/-amwGemq-PDQ/Ukiy_rP832I/AAAAAAAAJEE/BjKuqqQVzeQ/w281-h500-no/3.png)
 
 ![Screenshot 4](https://lh5.googleusercontent.com/-Mh-_AoEunxw/UkizAF-T5HI/AAAAAAAAJEI/tR0Sl5vCLVo/w281-h500-no/4.png)
+
+All content authored by: devadvance (<a href="https://plus.google.com/115147267178456662187?rel=author">+Matt Joseph</a>)
