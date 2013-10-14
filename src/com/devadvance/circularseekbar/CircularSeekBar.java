@@ -742,6 +742,11 @@ public class CircularSeekBar extends View {
 				return false;
 			}
 			break;
+		case MotionEvent.ACTION_CANCEL: // Used when the parent view intercepts touches for things like scrolling
+			mPointerHaloPaint.setAlpha(mPointerAlpha);
+			mUserIsMovingPointer = false;
+			invalidate();
+			break;
 		}
 
 		if (event.getAction() == MotionEvent.ACTION_MOVE && getParent() != null) {
@@ -784,6 +789,12 @@ public class CircularSeekBar extends View {
 		state.putParcelable("PARENT", superState);
 		state.putInt("MAX", mMax);
 		state.putInt("PROGRESS", mProgress);
+		state.putInt("mCircleColor", mCircleColor);
+		state.putInt("mCircleProgressColor", mCircleProgressColor);
+		state.putInt("mPointerColor", mPointerColor);
+		state.putInt("mPointerHaloColor", mPointerHaloColor);
+		state.putInt("mPointerAlpha", mPointerAlpha);
+		state.putInt("mPointerAlphaOnTouch", mPointerAlphaOnTouch);
 
 		return state;
 	}
@@ -797,6 +808,14 @@ public class CircularSeekBar extends View {
 
 		mMax = savedState.getInt("MAX");
 		mProgress = savedState.getInt("PROGRESS");
+		mCircleColor = savedState.getInt("mCircleColor");
+		mCircleProgressColor = savedState.getInt("mCircleProgressColor");
+		mPointerColor = savedState.getInt("mPointerColor");
+		mPointerHaloColor = savedState.getInt("mPointerHaloColor");
+		mPointerAlpha = savedState.getInt("mPointerAlpha");
+		mPointerAlphaOnTouch = savedState.getInt("mPointerAlphaOnTouch");
+		
+		initPaints();
 
 		recalculateAll();
 	}
@@ -808,7 +827,118 @@ public class CircularSeekBar extends View {
 
 	public interface OnCircularSeekBarChangeListener {
 
-		public abstract void onProgressChanged(CircularSeekBar seekBar, int progress, boolean fromUser);
+		public abstract void onProgressChanged(CircularSeekBar circularSeekBar, int progress, boolean fromUser);
 
 	}
+	
+	/**
+	 * Sets the circle color.
+	 * @param color the color of the circle
+	 */
+	public void setCircleColor(int color) {
+		mCircleColor = color;
+		mCirclePaint.setColor(mCircleColor);
+		invalidate();
+	}
+	
+	/**
+	 * Gets the circle color.
+	 * @return An integer color value for the circle
+	 */
+	public int getCircleColor() {
+		return mCircleColor;
+	}
+	
+	/**
+	 * Sets the circle progress color.
+	 * @param color the color of the circle progress
+	 */
+	public void setCircleProgressColor(int color) {
+		mCircleProgressColor = color;
+		mCircleProgressPaint.setColor(mCircleProgressColor);
+		invalidate();
+	}
+	
+	/**
+	 * Gets the circle progress color.
+	 * @return An integer color value for the circle progress
+	 */
+	public int getCircleProgressColor() {
+		return mCircleProgressColor;
+	}
+	
+	/**
+	 * Sets the pointer color.
+	 * @param color the color of the pointer
+	 */
+	public void setPointerColor(int color) {
+		mPointerColor = color;
+		mPointerPaint.setColor(mPointerColor);
+		invalidate();
+	}
+	
+	/**
+	 * Gets the pointer color.
+	 * @return An integer color value for the pointer
+	 */
+	public int getPointerColor() {
+		return mPointerColor;
+	}
+	
+	/**
+	 * Sets the pointer halo color.
+	 * @param color the color of the pointer halo
+	 */
+	public void setPointerHaloColor(int color) {
+		mPointerHaloColor = color;
+		mPointerHaloPaint.setColor(mPointerHaloColor);
+		invalidate();
+	}
+	
+	/**
+	 * Gets the pointer halo color.
+	 * @return An integer color value for the pointer halo
+	 */
+	public int getPointerHaloColor() {
+		return mPointerHaloColor;
+	}
+	
+	/**
+	 * Sets the pointer alpha.
+	 * @param alpha the alpha of the pointer
+	 */
+	public void setPointerAlpha(int alpha) {
+		if (alpha >=0 && alpha <= 255) {
+			mPointerAlpha = alpha;
+			mPointerHaloPaint.setAlpha(mPointerAlpha);
+			invalidate();
+		}
+	}
+	
+	/**
+	 * Gets the pointer alpha value.
+	 * @return An integer alpha value for the pointer (0..255)
+	 */
+	public int getPointerAlpha() {
+		return mPointerAlpha;
+	}
+	
+	/**
+	 * Sets the pointer alpha when touched.
+	 * @param alpha the alpha of the pointer (0..255) when touched
+	 */
+	public void setPointerAlphaOnTouch(int alpha) {
+		if (alpha >=0 && alpha <= 255) {
+			mPointerAlphaOnTouch = alpha;
+		}
+	}
+	
+	/**
+	 * Gets the pointer alpha value when touched.
+	 * @return An integer alpha value for the pointer (0..255) when touched
+	 */
+	public int getPointerAlphaOnTouch() {
+		return mPointerAlphaOnTouch;
+	}
+	
 }

@@ -127,7 +127,7 @@ Next, create a listener that implements the OnCircularSeekBarChangeListener:
 
 	public class CircleSeekBarListener implements OnCircularSeekBarChangeListener {
 		@Override
-		public void onProgressChanged(CircularSeekBar seekBar, int progress, boolean fromUser) {
+		public void onProgressChanged(CircularSeekBar circularSeekBar, int progress, boolean fromUser) {
 			// TODO Insert your code here
 			
 		}
@@ -176,7 +176,27 @@ Available Attributes:
 <b>pointer_halo_color</b> - String value. Hex color value, can be #RRGGBB or #AARRGGBB (where AA is the alpha value). If no alpha is included, it defaults to 200 (out of 255).
 
 <b>pointer_alpha_ontouch</b> - Integer value. When the user touches the CircularSeekBar, the opacity/alpha of the pointer halo changes to this value. Defaults to 100 (out of 255).
-	
+
+
+<h2>All Available Methods</h2>
+
+The methods available to View are all present, as well as some custom methods that allow customization programmatically:
+
+<b>setCircleColor</b> and <b>getCircleColor</b>
+
+<b>setCircleProgressColor</b> and <b>getCircleProgressColor</b>
+
+<b>setPointerColor</b> and <b>getPointerColor</b>
+
+<b>setPointerHaloColor</b> and <b>getPointerHaloColor</b>
+
+<b>setPointerAlpha</b> and <b>getPointerAlpha</b>
+
+<b>setPointerAlphaOnTouch</b> and <b>getPointerAlphaOnTouch</b>
+
+Note: Changes made with these methods are persisted by saving state.
+
+
 <h2>License</h2>
 	
  	 Copyright 2013 Matt Joseph
