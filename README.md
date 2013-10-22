@@ -182,6 +182,10 @@ Available Attributes:
 
 The methods available to View are all present, as well as some custom methods that allow customization programmatically:
 
+<b>setProgress</b> and <b>getProgress</b>
+
+<b>setMax</b> and <b>getMax</b>
+
 <b>setCircleColor</b> and <b>getCircleColor</b>
 
 <b>setCircleProgressColor</b> and <b>getCircleProgressColor</b>
