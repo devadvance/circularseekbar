@@ -20,6 +20,7 @@
         <attr name="pointer_alpha_ontouch" format="integer"></attr>
         <attr name="start_angle" format="float"></attr>
         <attr name="end_angle" format="float"></attr>
+        <attr name="circle_fill" format="string"></attr>
     </declare-styleable>
 
 </resources>
