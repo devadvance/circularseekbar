@@ -18,7 +18,7 @@
  * 
  * This custom view/widget was inspired and guided by:
  * 
- * HoloCircleSeekBar - Copyright 2012 Jesús Manzano
+ * HoloCircleSeekBar - Copyright 2012 Jesï¿½s Manzano
  * HoloColorPicker - Copyright 2012 Lars Werkman (Designed by Marie Schweiz)
  * 
  * Although I did not used the code from either project directly, they were both used as 
@@ -69,6 +69,7 @@ public class CircularSeekBar extends View {
 	private static final int DEFAULT_CIRCLE_PROGRESS_COLOR = Color.argb(235, 74, 138, 255);
 	private static final int DEFAULT_POINTER_COLOR = Color.argb(235, 74, 138, 255);
 	private static final int DEFAULT_POINTER_HALO_COLOR = Color.argb(135, 74, 138, 255);
+	private static final int DEFAULT_CIRCLE_FILL = Color.TRANSPARENT;
 	private static final int DEFAULT_POINTER_ALPHA = 135;
 	private static final int DEFAULT_POINTER_ALPHA_ONTOUCH = 100;
 	private static final boolean DEFAULT_USE_CUSTOM_RADII = false;
@@ -79,6 +80,11 @@ public class CircularSeekBar extends View {
 	 * {@code Paint} instance used to draw the inactive circle.
 	 */
 	private Paint mCirclePaint;
+
+	/**
+	 * {@code Paint} instance used to draw the circle fill.
+	 */
+	private Paint mCircleFillPaint;
 
 	/**
 	 * {@code Paint} instance used to draw the active circle (represents progress).
@@ -170,6 +176,11 @@ public class CircularSeekBar extends View {
 	 * Holds the color value for {@code mCirclePaint} before the {@code Paint} instance is created.
 	 */
 	private int mCircleColor = DEFAULT_CIRCLE_COLOR;
+
+	/**
+	 * Holds the color value for {@code mCrircleFillPaint} before the {@code Paint} instance is created.
+	 */
+	private int mCircleFill = DEFAULT_CIRCLE_FILL;
 
 	/**
 	 * Holds the color value for {@code mCircleProgressPaint} before the {@code Paint} instance is created.
@@ -369,6 +380,15 @@ public class CircularSeekBar extends View {
 			}
 		}
 
+		tempColor = attrArray.getString(R.styleable.CircularSeekBar_circle_fill);
+		if (tempColor != null) {
+			try {
+				mCircleFill = Color.parseColor(tempColor);
+			} catch (IllegalArgumentException e) {
+				mCircleFill = DEFAULT_CIRCLE_FILL;
+			}
+		}
+
 		mPointerAlpha = Color.alpha(mPointerHaloColor);
 
 		mPointerAlphaOnTouch = attrArray.getInt(R.styleable.CircularSeekBar_pointer_alpha_ontouch, DEFAULT_POINTER_ALPHA_ONTOUCH);
@@ -406,6 +426,12 @@ public class CircularSeekBar extends View {
 		mCirclePaint.setStyle(Paint.Style.STROKE);
 		mCirclePaint.setStrokeJoin(Paint.Join.ROUND);
 		mCirclePaint.setStrokeCap(Paint.Cap.ROUND);
+
+		mCircleFillPaint = new Paint();
+		mCircleFillPaint.setAntiAlias(true);
+		mCircleFillPaint.setDither(true);
+		mCircleFillPaint.setColor(mCircleFill);
+		mCircleFillPaint.setStyle(Paint.Style.FILL);
 
 		mCircleProgressPaint = new Paint();
 		mCircleProgressPaint.setAntiAlias(true);
@@ -506,6 +532,8 @@ public class CircularSeekBar extends View {
 		canvas.drawPath(mCirclePath, mCirclePaint);
 		canvas.drawPath(mCircleProgressPath, mCircleProgressGlowPaint);
 		canvas.drawPath(mCircleProgressPath, mCircleProgressPaint);
+
+		canvas.drawPath(mCirclePath, mCircleFillPaint);
 
 		canvas.drawCircle(mPointerPositionXY[0], mPointerPositionXY[1], mPointerRadius + mPointerHaloWidth, mPointerHaloPaint);
 		canvas.drawCircle(mPointerPositionXY[0], mPointerPositionXY[1], mPointerRadius, mPointerPaint);
