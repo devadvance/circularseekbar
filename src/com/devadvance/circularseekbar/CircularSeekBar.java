@@ -975,7 +975,7 @@ public class CircularSeekBar extends View {
 	 */
 	public void setCircleFillColor(int color) {
 		mCircleFillColor = color;
-		mPointerPaint.setColor(mCircleFillColor);
+		mCircleFillPaint.setColor(mCircleFillColor);
 		invalidate();
 	}
 	
