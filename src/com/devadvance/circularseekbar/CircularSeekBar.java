@@ -69,7 +69,7 @@ public class CircularSeekBar extends View {
 	private static final int DEFAULT_CIRCLE_PROGRESS_COLOR = Color.argb(235, 74, 138, 255);
 	private static final int DEFAULT_POINTER_COLOR = Color.argb(235, 74, 138, 255);
 	private static final int DEFAULT_POINTER_HALO_COLOR = Color.argb(135, 74, 138, 255);
-	private static final int DEFAULT_CIRCLE_FILL = Color.TRANSPARENT;
+	private static final int DEFAULT_CIRCLE_FILL_COLOR = Color.TRANSPARENT;
 	private static final int DEFAULT_POINTER_ALPHA = 135;
 	private static final int DEFAULT_POINTER_ALPHA_ONTOUCH = 100;
 	private static final boolean DEFAULT_USE_CUSTOM_RADII = false;
@@ -178,9 +178,9 @@ public class CircularSeekBar extends View {
 	private int mCircleColor = DEFAULT_CIRCLE_COLOR;
 
 	/**
-	 * Holds the color value for {@code mCrircleFillPaint} before the {@code Paint} instance is created.
+	 * Holds the color value for {@code mCircleFillPaint} before the {@code Paint} instance is created.
 	 */
-	private int mCircleFill = DEFAULT_CIRCLE_FILL;
+	private int mCircleFillColor = DEFAULT_CIRCLE_FILL_COLOR;
 
 	/**
 	 * Holds the color value for {@code mCircleProgressPaint} before the {@code Paint} instance is created.
@@ -383,9 +383,9 @@ public class CircularSeekBar extends View {
 		tempColor = attrArray.getString(R.styleable.CircularSeekBar_circle_fill);
 		if (tempColor != null) {
 			try {
-				mCircleFill = Color.parseColor(tempColor);
+				mCircleFillColor = Color.parseColor(tempColor);
 			} catch (IllegalArgumentException e) {
-				mCircleFill = DEFAULT_CIRCLE_FILL;
+				mCircleFillColor = DEFAULT_CIRCLE_FILL_COLOR;
 			}
 		}
 
@@ -430,7 +430,7 @@ public class CircularSeekBar extends View {
 		mCircleFillPaint = new Paint();
 		mCircleFillPaint.setAntiAlias(true);
 		mCircleFillPaint.setDither(true);
-		mCircleFillPaint.setColor(mCircleFill);
+		mCircleFillPaint.setColor(mCircleFillColor);
 		mCircleFillPaint.setStyle(Paint.Style.FILL);
 
 		mCircleProgressPaint = new Paint();
@@ -967,6 +967,24 @@ public class CircularSeekBar extends View {
 	 */
 	public int getPointerAlphaOnTouch() {
 		return mPointerAlphaOnTouch;
+	}
+
+	/**
+	 * Sets the circle fill color.
+	 * @param color the color of the circle fill
+	 */
+	public void setCircleFillColor(int color) {
+		mCircleFillColor = color;
+		mPointerPaint.setColor(mCircleFillColor);
+		invalidate();
+	}
+	
+	/**
+	 * Gets the circle fill color.
+	 * @return An integer color value for the circle fill
+	 */
+	public int getCircleFillColor() {
+		return mCircleFillColor;
 	}
 
 	/**
