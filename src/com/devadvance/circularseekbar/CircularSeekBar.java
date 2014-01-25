@@ -298,6 +298,18 @@ public class CircularSeekBar extends View {
 	private float lastCWDistanceFromStart;
 
 	/**
+	 * Represents the clockwise distance from {@code mPointerPosition} to the touch angle.
+	 * Used when touching the CircularSeekBar.
+	 */
+	private float cwDistanceFromPointer;
+
+	/**
+	 * Represents the counter-clockwise distance from {@code mPointerPosition} to the touch angle.
+	 * Used when touching the CircularSeekBar.
+	 */
+	private float ccwDistanceFromPointer;
+
+	/**
 	 * True if the user is moving clockwise around the circle, false if moving counter-clockwise.
 	 * Used when touching the CircularSeekBar.
 	 */
@@ -668,8 +680,26 @@ public class CircularSeekBar extends View {
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			// If the user is touching outside of the start AND end
-			if (cwDistanceFromStart > mTotalCircleDegrees) {
+			// These are only used for ACTION_DOWN for handling if the pointer was the part that was touched
+			float pointerRadiusDegrees = (float) ((mPointerRadius * 180) / (Math.PI * Math.max(mCircleHeight, mCircleWidth)));
+			cwDistanceFromPointer = touchAngle - mPointerPosition;
+			cwDistanceFromPointer = (cwDistanceFromPointer < 0 ? 360f + cwDistanceFromPointer : cwDistanceFromPointer);
+			ccwDistanceFromPointer = 360f - cwDistanceFromPointer;
+			// This is for if the first touch is on the actual pointer. 
+			if (((touchEventRadius >= innerRadius) && (touchEventRadius <= outerRadius)) && ( (cwDistanceFromPointer <= pointerRadiusDegrees) || (ccwDistanceFromPointer <= pointerRadiusDegrees)) ) {
+				setProgressBasedOnAngle(mPointerPosition);
+				lastCWDistanceFromStart = cwDistanceFromStart;
+				mIsMovingCW = true;
+				mPointerHaloPaint.setAlpha(mPointerAlphaOnTouch);
+				recalculateAll();
+				invalidate();
+				if (mOnCircularSeekBarChangeListener != null) {
+					mOnCircularSeekBarChangeListener.onProgressChanged(this, mProgress, true);
+				}
+				mUserIsMovingPointer = true;
+				lockAtEnd = false;
+				lockAtStart = false;
+			} else if (cwDistanceFromStart > mTotalCircleDegrees) { // If the user is touching outside of the start AND end
 				mUserIsMovingPointer = false;
 				return false;
 			} else if ((touchEventRadius >= innerRadius) && (touchEventRadius <= outerRadius)) { // If the user is touching near the circle
