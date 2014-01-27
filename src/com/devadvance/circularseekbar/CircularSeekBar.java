@@ -794,7 +794,7 @@ public class CircularSeekBar extends View {
 				mUserIsMovingPointer = false;
 				invalidate();
 				if (mOnCircularSeekBarChangeListener != null) {
-					mOnCircularSeekBarChangeListener.onProgressChanged(this, mProgress, true);
+					mOnCircularSeekBarChangeListener.onStopTrackingTouch(this);
 				}
 			} else {
 				return false;
@@ -886,6 +886,8 @@ public class CircularSeekBar extends View {
 	public interface OnCircularSeekBarChangeListener {
 
 		public abstract void onProgressChanged(CircularSeekBar circularSeekBar, int progress, boolean fromUser);
+
+		public abstract void onStopTrackingTouch(CircularSeekBar seekBar);
 
 	}
 	
