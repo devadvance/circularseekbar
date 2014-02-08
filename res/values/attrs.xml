@@ -17,6 +17,7 @@
         <attr name="circle_progress_color" format="string"></attr>
         <attr name="pointer_color" format="string"></attr>
         <attr name="pointer_halo_color" format="string"></attr>
+        <attr name="pointer_halo_color_ontouch" format="string"></attr>
         <attr name="pointer_alpha_ontouch" format="integer"></attr>
         <attr name="start_angle" format="float"></attr>
         <attr name="end_angle" format="float"></attr>
