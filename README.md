@@ -155,6 +155,8 @@ Available Attributes:
 
 <b>use_custom_radii</b> - True/False. Default is false. If true, then you can specify radii using attributes. No matter what is specified, they will not exceed the bounds of the View itself. If false, then the View size (android:layout_width and android:layout_height) is used.
 
+<b>lock_enabled</b> - True/False. Default is true. If true, then the progress will "stick" to the start/end point. If false, it'll just pass through.
+
 <b>circle_x_radius</b> - Decimal Value. Custom X radius in DP.. Requires use_custom_radii to be true.
 
 <b>circle_y_radius</b> - Decimal Value. Custom Y radius in DP. Requires use_custom_radii to be true.
@@ -197,6 +199,8 @@ The methods available to View are all present, as well as some custom methods th
 <b>setPointerAlpha</b> and <b>getPointerAlpha</b>
 
 <b>setPointerAlphaOnTouch</b> and <b>getPointerAlphaOnTouch</b>
+
+<b>setLockEnabled</b> and <b>isLockEnabled</b>
 
 Note: Changes made with these methods are persisted by saving state.
 
