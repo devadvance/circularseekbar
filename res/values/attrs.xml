@@ -7,6 +7,7 @@
         <attr name="move_outside_circle" format="boolean"></attr>
         <attr name="maintain_equal_circle" format="boolean"></attr>
         <attr name="use_custom_radii" format="boolean"></attr>
+        <attr name="lock_enabled" format="boolean"></attr>
         <attr name="circle_x_radius" format="float" />
         <attr name="circle_y_radius" format="float" />
         <attr name="circle_stroke_width" format="float" />

@@ -76,6 +76,7 @@ public class CircularSeekBar extends View {
 	private static final boolean DEFAULT_USE_CUSTOM_RADII = false;
 	private static final boolean DEFAULT_MAINTAIN_EQUAL_CIRCLE = true;
 	private static final boolean DEFAULT_MOVE_OUTSIDE_CIRCLE = false;
+    private static final boolean DEFAULT_LOCK_ENABLED = true;
 
 	/**
 	 * {@code Paint} instance used to draw the inactive circle.
@@ -256,7 +257,7 @@ public class CircularSeekBar extends View {
     /**
      * Used for enabling/disabling the lock option for easier hitting of the 0 progress mark.
      * */
-    private boolean lockEnabled = false;
+    private boolean lockEnabled = true;
 
 	/**
 	 * Used for when the user moves beyond the start of the circle when moving counter clockwise.
@@ -433,6 +434,7 @@ public class CircularSeekBar extends View {
 		mCustomRadii = attrArray.getBoolean(R.styleable.CircularSeekBar_use_custom_radii, DEFAULT_USE_CUSTOM_RADII);
 		mMaintainEqualCircle = attrArray.getBoolean(R.styleable.CircularSeekBar_maintain_equal_circle, DEFAULT_MAINTAIN_EQUAL_CIRCLE);
 		mMoveOutsideCircle = attrArray.getBoolean(R.styleable.CircularSeekBar_move_outside_circle, DEFAULT_MOVE_OUTSIDE_CIRCLE);
+        lockEnabled = attrArray.getBoolean(R.styleable.CircularSeekBar_lock_enabled, DEFAULT_LOCK_ENABLED);
 
 		// Modulo 360 right now to avoid constant conversion
 		mStartAngle = ((360f + (attrArray.getFloat((R.styleable.CircularSeekBar_start_angle), DEFAULT_START_ANGLE) % 360f)) % 360f);
@@ -888,6 +890,7 @@ public class CircularSeekBar extends View {
 		state.putInt("mPointerHaloColorOnTouch", mPointerHaloColorOnTouch);
 		state.putInt("mPointerAlpha", mPointerAlpha);
 		state.putInt("mPointerAlphaOnTouch", mPointerAlphaOnTouch);
+        state.putBoolean("lockEnabled", lockEnabled);
 
 		return state;
 	}
@@ -908,6 +911,7 @@ public class CircularSeekBar extends View {
 		mPointerHaloColorOnTouch = savedState.getInt("mPointerHaloColorOnTouch");
 		mPointerAlpha = savedState.getInt("mPointerAlpha");
 		mPointerAlphaOnTouch = savedState.getInt("mPointerAlphaOnTouch");
+        lockEnabled = savedState.getBoolean("lockEnabled");
 
 		initPaints();
 
