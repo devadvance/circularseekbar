@@ -8,21 +8,21 @@
         <attr name="maintain_equal_circle" format="boolean"></attr>
         <attr name="use_custom_radii" format="boolean"></attr>
         <attr name="lock_enabled" format="boolean"></attr>
-        <attr name="circle_x_radius" format="float" />
-        <attr name="circle_y_radius" format="float" />
-        <attr name="circle_stroke_width" format="float" />
-        <attr name="pointer_radius" format="float" />
-        <attr name="pointer_halo_width" format="float" />
-        <attr name="pointer_halo_border_width" format="float"></attr>
-        <attr name="circle_color" format="string"></attr>
-        <attr name="circle_progress_color" format="string"></attr>
-        <attr name="pointer_color" format="string"></attr>
-        <attr name="pointer_halo_color" format="string"></attr>
-        <attr name="pointer_halo_color_ontouch" format="string"></attr>
+        <attr name="circle_x_radius" format="dimension" />
+        <attr name="circle_y_radius" format="dimension" />
+        <attr name="circle_stroke_width" format="dimension" />
+        <attr name="pointer_radius" format="dimension" />
+        <attr name="pointer_halo_width" format="dimension" />
+        <attr name="pointer_halo_border_width" format="dimension"></attr>
+        <attr name="circle_color" format="color"></attr>
+        <attr name="circle_progress_color" format="color"></attr>
+        <attr name="pointer_color" format="color"></attr>
+        <attr name="pointer_halo_color" format="color"></attr>
+        <attr name="pointer_halo_color_ontouch" format="color"></attr>
         <attr name="pointer_alpha_ontouch" format="integer"></attr>
         <attr name="start_angle" format="float"></attr>
         <attr name="end_angle" format="float"></attr>
-        <attr name="circle_fill" format="string"></attr>
+        <attr name="circle_fill" format="color"></attr>
     </declare-styleable>
 
 </resources>
