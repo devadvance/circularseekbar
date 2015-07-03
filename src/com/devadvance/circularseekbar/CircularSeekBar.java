@@ -355,6 +355,12 @@ public class CircularSeekBar extends View {
 	 */
 	protected OnCircularSeekBarChangeListener mOnCircularSeekBarChangeListener;
 
+
+	/**
+	 * 
+	 */
+	protected boolean isTouchEnabled = true;
+
 	/**
 	 * Initialize the CircularSeekBar with the attributes from the XML style.
 	 * Uses the defaults defined at the top of this file when an attribute is not specified by the user.
@@ -666,6 +672,10 @@ public class CircularSeekBar extends View {
 
     @Override
 	public boolean onTouchEvent(MotionEvent event) {
+		if(!isTouchEnabled){
+			return false;
+		}
+
 		// Convert coordinates to our internal coordinate system
 		float x = event.getX() - getWidth() / 2;
 		float y = event.getY() - getHeight() / 2;
@@ -1090,6 +1100,15 @@ public class CircularSeekBar extends View {
 	 */
 	public synchronized int getMax() {
 		return mMax;
+	}
+
+
+	public void setIsTouchEnabled(boolean value){
+		isTouchEnabled = value;
+	}
+
+	public boolean getIsTouchEnabled(){
+		return isTouchEnabled;
 	}
 
 }
