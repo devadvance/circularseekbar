@@ -47,253 +47,253 @@ public class CircularSeekBar extends View {
 	/**
 	 * Used to scale the dp units to pixels
 	 */
-	private final float DPTOPX_SCALE = getResources().getDisplayMetrics().density;
+	protected final float DPTOPX_SCALE = getResources().getDisplayMetrics().density;
 
 	/**
 	 * Minimum touch target size in DP. 48dp is the Android design recommendation
 	 */
-	private final float MIN_TOUCH_TARGET_DP = 48;
+	protected final float MIN_TOUCH_TARGET_DP = 48;
 
 	// Default values
-	private static final float DEFAULT_CIRCLE_X_RADIUS = 30f;
-	private static final float DEFAULT_CIRCLE_Y_RADIUS = 30f;
-	private static final float DEFAULT_POINTER_RADIUS = 7f;
-	private static final float DEFAULT_POINTER_HALO_WIDTH = 6f;
-	private static final float DEFAULT_POINTER_HALO_BORDER_WIDTH = 2f;
-	private static final float DEFAULT_CIRCLE_STROKE_WIDTH = 5f;
-	private static final float DEFAULT_START_ANGLE = 270f; // Geometric (clockwise, relative to 3 o'clock)
-	private static final float DEFAULT_END_ANGLE = 270f; // Geometric (clockwise, relative to 3 o'clock)
-	private static final int DEFAULT_MAX = 100;
-	private static final int DEFAULT_PROGRESS = 0;
-	private static final int DEFAULT_CIRCLE_COLOR = Color.DKGRAY;
-	private static final int DEFAULT_CIRCLE_PROGRESS_COLOR = Color.argb(235, 74, 138, 255);
-	private static final int DEFAULT_POINTER_COLOR = Color.argb(235, 74, 138, 255);
-	private static final int DEFAULT_POINTER_HALO_COLOR = Color.argb(135, 74, 138, 255);
-	private static final int DEFAULT_POINTER_HALO_COLOR_ONTOUCH = Color.argb(135, 74, 138, 255);
-	private static final int DEFAULT_CIRCLE_FILL_COLOR = Color.TRANSPARENT;
-	private static final int DEFAULT_POINTER_ALPHA = 135;
-	private static final int DEFAULT_POINTER_ALPHA_ONTOUCH = 100;
-	private static final boolean DEFAULT_USE_CUSTOM_RADII = false;
-	private static final boolean DEFAULT_MAINTAIN_EQUAL_CIRCLE = true;
-	private static final boolean DEFAULT_MOVE_OUTSIDE_CIRCLE = false;
-    private static final boolean DEFAULT_LOCK_ENABLED = true;
+	protected static final float DEFAULT_CIRCLE_X_RADIUS = 30f;
+	protected static final float DEFAULT_CIRCLE_Y_RADIUS = 30f;
+	protected static final float DEFAULT_POINTER_RADIUS = 7f;
+	protected static final float DEFAULT_POINTER_HALO_WIDTH = 6f;
+	protected static final float DEFAULT_POINTER_HALO_BORDER_WIDTH = 2f;
+	protected static final float DEFAULT_CIRCLE_STROKE_WIDTH = 5f;
+	protected static final float DEFAULT_START_ANGLE = 270f; // Geometric (clockwise, relative to 3 o'clock)
+	protected static final float DEFAULT_END_ANGLE = 270f; // Geometric (clockwise, relative to 3 o'clock)
+	protected static final int DEFAULT_MAX = 100;
+	protected static final int DEFAULT_PROGRESS = 0;
+	protected static final int DEFAULT_CIRCLE_COLOR = Color.DKGRAY;
+	protected static final int DEFAULT_CIRCLE_PROGRESS_COLOR = Color.argb(235, 74, 138, 255);
+	protected static final int DEFAULT_POINTER_COLOR = Color.argb(235, 74, 138, 255);
+	protected static final int DEFAULT_POINTER_HALO_COLOR = Color.argb(135, 74, 138, 255);
+	protected static final int DEFAULT_POINTER_HALO_COLOR_ONTOUCH = Color.argb(135, 74, 138, 255);
+	protected static final int DEFAULT_CIRCLE_FILL_COLOR = Color.TRANSPARENT;
+	protected static final int DEFAULT_POINTER_ALPHA = 135;
+	protected static final int DEFAULT_POINTER_ALPHA_ONTOUCH = 100;
+	protected static final boolean DEFAULT_USE_CUSTOM_RADII = false;
+	protected static final boolean DEFAULT_MAINTAIN_EQUAL_CIRCLE = true;
+	protected static final boolean DEFAULT_MOVE_OUTSIDE_CIRCLE = false;
+    protected static final boolean DEFAULT_LOCK_ENABLED = true;
 
 	/**
 	 * {@code Paint} instance used to draw the inactive circle.
 	 */
-	private Paint mCirclePaint;
+	protected Paint mCirclePaint;
 
 	/**
 	 * {@code Paint} instance used to draw the circle fill.
 	 */
-	private Paint mCircleFillPaint;
+	protected Paint mCircleFillPaint;
 
 	/**
 	 * {@code Paint} instance used to draw the active circle (represents progress).
 	 */
-	private Paint mCircleProgressPaint;
+	protected Paint mCircleProgressPaint;
 
 	/**
 	 * {@code Paint} instance used to draw the glow from the active circle.
 	 */
-	private Paint mCircleProgressGlowPaint;
+	protected Paint mCircleProgressGlowPaint;
 
 	/**
 	 * {@code Paint} instance used to draw the center of the pointer.
 	 * Note: This is broken on 4.0+, as BlurMasks do not work with hardware acceleration.
 	 */
-	private Paint mPointerPaint;
+	protected Paint mPointerPaint;
 
 	/**
 	 * {@code Paint} instance used to draw the halo of the pointer.
 	 * Note: The halo is the part that changes transparency.
 	 */
-	private Paint mPointerHaloPaint;
+	protected Paint mPointerHaloPaint;
 
 	/**
 	 * {@code Paint} instance used to draw the border of the pointer, outside of the halo.
 	 */
-	private Paint mPointerHaloBorderPaint;
+	protected Paint mPointerHaloBorderPaint;
 
 	/**
 	 * The width of the circle (in pixels).
 	 */
-	private float mCircleStrokeWidth;
+	protected float mCircleStrokeWidth;
 
 	/**
 	 * The X radius of the circle (in pixels).
 	 */
-	private float mCircleXRadius;
+	protected float mCircleXRadius;
 
 	/**
 	 * The Y radius of the circle (in pixels).
 	 */
-	private float mCircleYRadius;
+	protected float mCircleYRadius;
 
 	/**
 	 * The radius of the pointer (in pixels).
 	 */
-	private float mPointerRadius;
+	protected float mPointerRadius;
 
 	/**
 	 * The width of the pointer halo (in pixels).
 	 */
-	private float mPointerHaloWidth;
+	protected float mPointerHaloWidth;
 
 	/**
 	 * The width of the pointer halo border (in pixels).
 	 */
-	private float mPointerHaloBorderWidth;
+	protected float mPointerHaloBorderWidth;
 
 	/**
 	 * Start angle of the CircularSeekBar.
 	 * Note: If mStartAngle and mEndAngle are set to the same angle, 0.1 is subtracted
 	 * from the mEndAngle to make the circle function properly.
 	 */
-	private float mStartAngle;
+	protected float mStartAngle;
 
 	/**
 	 * End angle of the CircularSeekBar.
 	 * Note: If mStartAngle and mEndAngle are set to the same angle, 0.1 is subtracted
 	 * from the mEndAngle to make the circle function properly.
 	 */
-	private float mEndAngle;
+	protected float mEndAngle;
 
 	/**
 	 * {@code RectF} that represents the circle (or ellipse) of the seekbar.
 	 */
-	private RectF mCircleRectF = new RectF();
+	protected RectF mCircleRectF = new RectF();
 
 	/**
 	 * Holds the color value for {@code mPointerPaint} before the {@code Paint} instance is created.
 	 */
-	private int mPointerColor = DEFAULT_POINTER_COLOR;
+	protected int mPointerColor = DEFAULT_POINTER_COLOR;
 
 	/**
 	 * Holds the color value for {@code mPointerHaloPaint} before the {@code Paint} instance is created.
 	 */
-	private int mPointerHaloColor = DEFAULT_POINTER_HALO_COLOR;
+	protected int mPointerHaloColor = DEFAULT_POINTER_HALO_COLOR;
 
 	/**
 	 * Holds the color value for {@code mPointerHaloPaint} before the {@code Paint} instance is created.
 	 */
-	private int mPointerHaloColorOnTouch = DEFAULT_POINTER_HALO_COLOR_ONTOUCH;
+	protected int mPointerHaloColorOnTouch = DEFAULT_POINTER_HALO_COLOR_ONTOUCH;
 
 	/**
 	 * Holds the color value for {@code mCirclePaint} before the {@code Paint} instance is created.
 	 */
-	private int mCircleColor = DEFAULT_CIRCLE_COLOR;
+	protected int mCircleColor = DEFAULT_CIRCLE_COLOR;
 
 	/**
 	 * Holds the color value for {@code mCircleFillPaint} before the {@code Paint} instance is created.
 	 */
-	private int mCircleFillColor = DEFAULT_CIRCLE_FILL_COLOR;
+	protected int mCircleFillColor = DEFAULT_CIRCLE_FILL_COLOR;
 
 	/**
 	 * Holds the color value for {@code mCircleProgressPaint} before the {@code Paint} instance is created.
 	 */
-	private int mCircleProgressColor = DEFAULT_CIRCLE_PROGRESS_COLOR;
+	protected int mCircleProgressColor = DEFAULT_CIRCLE_PROGRESS_COLOR;
 
 	/**
 	 * Holds the alpha value for {@code mPointerHaloPaint}.
 	 */
-	private int mPointerAlpha = DEFAULT_POINTER_ALPHA;
+	protected int mPointerAlpha = DEFAULT_POINTER_ALPHA;
 
 	/**
 	 * Holds the OnTouch alpha value for {@code mPointerHaloPaint}.
 	 */
-	private int mPointerAlphaOnTouch = DEFAULT_POINTER_ALPHA_ONTOUCH;
+	protected int mPointerAlphaOnTouch = DEFAULT_POINTER_ALPHA_ONTOUCH;
 
 	/**
 	 * Distance (in degrees) that the the circle/semi-circle makes up.
 	 * This amount represents the max of the circle in degrees.
 	 */
-	private float mTotalCircleDegrees;
+	protected float mTotalCircleDegrees;
 
 	/**
 	 * Distance (in degrees) that the current progress makes up in the circle.
 	 */
-	private float mProgressDegrees;
+	protected float mProgressDegrees;
 
 	/**
 	 * {@code Path} used to draw the circle/semi-circle.
 	 */
-	private Path mCirclePath;
+	protected Path mCirclePath;
 
 	/**
 	 * {@code Path} used to draw the progress on the circle.
 	 */
-	private Path mCircleProgressPath;
+	protected Path mCircleProgressPath;
 
 	/**
 	 * Max value that this CircularSeekBar is representing.
 	 */
-	private int mMax;
+	protected int mMax;
 
 	/**
 	 * Progress value that this CircularSeekBar is representing.
 	 */
-	private int mProgress;
+	protected int mProgress;
 
 	/**
 	 * If true, then the user can specify the X and Y radii.
 	 * If false, then the View itself determines the size of the CircularSeekBar.
 	 */
-	private boolean mCustomRadii;
+	protected boolean mCustomRadii;
 
 	/**
 	 * Maintain a perfect circle (equal x and y radius), regardless of view or custom attributes.
 	 * The smaller of the two radii will always be used in this case.
 	 * The default is to be a circle and not an ellipse, due to the behavior of the ellipse.
 	 */
-	private boolean mMaintainEqualCircle;
+	protected boolean mMaintainEqualCircle;
 
 	/**
 	 * Once a user has touched the circle, this determines if moving outside the circle is able
 	 * to change the position of the pointer (and in turn, the progress).
 	 */
-	private boolean mMoveOutsideCircle;
+	protected boolean mMoveOutsideCircle;
 
     /**
      * Used for enabling/disabling the lock option for easier hitting of the 0 progress mark.
      * */
-    private boolean lockEnabled = true;
+    protected boolean lockEnabled = true;
 
 	/**
 	 * Used for when the user moves beyond the start of the circle when moving counter clockwise.
 	 * Makes it easier to hit the 0 progress mark.
 	 */
-	private boolean lockAtStart = true;
+	protected boolean lockAtStart = true;
 
 	/**
 	 * Used for when the user moves beyond the end of the circle when moving clockwise.
 	 * Makes it easier to hit the 100% (max) progress mark.
 	 */
-	private boolean lockAtEnd = false;
+	protected boolean lockAtEnd = false;
 
 	/**
 	 * When the user is touching the circle on ACTION_DOWN, this is set to true.
 	 * Used when touching the CircularSeekBar.
 	 */
-	private boolean mUserIsMovingPointer = false;
+	protected boolean mUserIsMovingPointer = false;
 
 	/**
 	 * Represents the clockwise distance from {@code mStartAngle} to the touch angle.
 	 * Used when touching the CircularSeekBar.
 	 */
-	private float cwDistanceFromStart;
+	protected float cwDistanceFromStart;
 
 	/**
 	 * Represents the counter-clockwise distance from {@code mStartAngle} to the touch angle.
 	 * Used when touching the CircularSeekBar.
 	 */
-	private float ccwDistanceFromStart;
+	protected float ccwDistanceFromStart;
 
 	/**
 	 * Represents the clockwise distance from {@code mEndAngle} to the touch angle.
 	 * Used when touching the CircularSeekBar.
 	 */
-	private float cwDistanceFromEnd;
+	protected float cwDistanceFromEnd;
 
 	/**
 	 * Represents the counter-clockwise distance from {@code mEndAngle} to the touch angle.
@@ -301,66 +301,66 @@ public class CircularSeekBar extends View {
 	 * Currently unused, but kept just in case.
 	 */
 	@SuppressWarnings("unused")
-	private float ccwDistanceFromEnd;
+	protected float ccwDistanceFromEnd;
 
 	/**
 	 * The previous touch action value for {@code cwDistanceFromStart}.
 	 * Used when touching the CircularSeekBar.
 	 */
-	private float lastCWDistanceFromStart;
+	protected float lastCWDistanceFromStart;
 
 	/**
 	 * Represents the clockwise distance from {@code mPointerPosition} to the touch angle.
 	 * Used when touching the CircularSeekBar.
 	 */
-	private float cwDistanceFromPointer;
+	protected float cwDistanceFromPointer;
 
 	/**
 	 * Represents the counter-clockwise distance from {@code mPointerPosition} to the touch angle.
 	 * Used when touching the CircularSeekBar.
 	 */
-	private float ccwDistanceFromPointer;
+	protected float ccwDistanceFromPointer;
 
 	/**
 	 * True if the user is moving clockwise around the circle, false if moving counter-clockwise.
 	 * Used when touching the CircularSeekBar.
 	 */
-	private boolean mIsMovingCW;
+	protected boolean mIsMovingCW;
 
 	/**
 	 * The width of the circle used in the {@code RectF} that is used to draw it.
 	 * Based on either the View width or the custom X radius.
 	 */
-	private float mCircleWidth;
+	protected float mCircleWidth;
 
 	/**
 	 * The height of the circle used in the {@code RectF} that is used to draw it.
 	 * Based on either the View width or the custom Y radius.
 	 */
-	private float mCircleHeight;
+	protected float mCircleHeight;
 
 	/**
 	 * Represents the progress mark on the circle, in geometric degrees.
 	 * This is not provided by the user; it is calculated;
 	 */
-	private float mPointerPosition;
+	protected float mPointerPosition;
 
 	/**
 	 * Pointer position in terms of X and Y coordinates.
 	 */
-	private float[] mPointerPositionXY = new float[2];
+	protected float[] mPointerPositionXY = new float[2];
 
 	/**
 	 * Listener.
 	 */
-	private OnCircularSeekBarChangeListener mOnCircularSeekBarChangeListener;
+	protected OnCircularSeekBarChangeListener mOnCircularSeekBarChangeListener;
 
 	/**
 	 * Initialize the CircularSeekBar with the attributes from the XML style.
 	 * Uses the defaults defined at the top of this file when an attribute is not specified by the user.
 	 * @param attrArray TypedArray containing the attributes.
 	 */
-	private void initAttributes(TypedArray attrArray) {
+	protected void initAttributes(TypedArray attrArray) {
 		mCircleXRadius = (float) (attrArray.getFloat(R.styleable.CircularSeekBar_circle_x_radius, DEFAULT_CIRCLE_X_RADIUS) * DPTOPX_SCALE);
 		mCircleYRadius = (float) (attrArray.getFloat(R.styleable.CircularSeekBar_circle_y_radius, DEFAULT_CIRCLE_Y_RADIUS) * DPTOPX_SCALE);
 		mPointerRadius = (float) (attrArray.getFloat(R.styleable.CircularSeekBar_pointer_radius, DEFAULT_POINTER_RADIUS) * DPTOPX_SCALE);
@@ -451,7 +451,7 @@ public class CircularSeekBar extends View {
 	/**
 	 * Initializes the {@code Paint} objects with the appropriate styles.
 	 */
-	private void initPaints() {
+	protected void initPaints() {
 		mCirclePaint = new Paint();
 		mCirclePaint.setAntiAlias(true);
 		mCirclePaint.setDither(true);
@@ -504,7 +504,7 @@ public class CircularSeekBar extends View {
 	 * Calculates the total degrees between mStartAngle and mEndAngle, and sets mTotalCircleDegrees
 	 * to this value.
 	 */
-	private void calculateTotalDegrees() {
+	protected void calculateTotalDegrees() {
 		mTotalCircleDegrees = (360f - (mStartAngle - mEndAngle)) % 360f; // Length of the entire circle/arc
 		if (mTotalCircleDegrees <= 0f) {
 			mTotalCircleDegrees = 360f;
@@ -515,7 +515,7 @@ public class CircularSeekBar extends View {
 	 * Calculate the degrees that the progress represents. Also called the sweep angle.
 	 * Sets mProgressDegrees to that value.
 	 */
-	private void calculateProgressDegrees() {
+	protected void calculateProgressDegrees() {
 		mProgressDegrees = mPointerPosition - mStartAngle; // Verified
 		mProgressDegrees = (mProgressDegrees < 0 ? 360f + mProgressDegrees : mProgressDegrees); // Verified
 	}
@@ -524,13 +524,13 @@ public class CircularSeekBar extends View {
 	 * Calculate the pointer position (and the end of the progress arc) in degrees.
 	 * Sets mPointerPosition to that value.
 	 */
-	private void calculatePointerAngle() {
+	protected void calculatePointerAngle() {
 		float progressPercent = ((float)mProgress / (float)mMax);
 		mPointerPosition = (progressPercent * mTotalCircleDegrees) + mStartAngle;
 		mPointerPosition = mPointerPosition % 360f;
 	}
 
-	private void calculatePointerXYPosition() {
+	protected void calculatePointerXYPosition() {
 		PathMeasure pm = new PathMeasure(mCircleProgressPath, false);
 		boolean returnValue = pm.getPosTan(pm.getLength(), mPointerPositionXY, null);
 		if (!returnValue) {
@@ -542,7 +542,7 @@ public class CircularSeekBar extends View {
 	/**
 	 * Initialize the {@code Path} objects with the appropriate values.
 	 */
-	private void initPaths() {
+	protected void initPaths() {
 		mCirclePath = new Path();
 		mCirclePath.addArc(mCircleRectF, mStartAngle, mTotalCircleDegrees);
 
@@ -553,7 +553,7 @@ public class CircularSeekBar extends View {
 	/**
 	 * Initialize the {@code RectF} objects with the appropriate values.
 	 */
-	private void initRects() {
+	protected void initRects() {
 		mCircleRectF.set(-mCircleWidth, -mCircleHeight, mCircleWidth, mCircleHeight);
 	}
 
@@ -602,13 +602,13 @@ public class CircularSeekBar extends View {
 		}
 	}
 
-	private void setProgressBasedOnAngle(float angle) {
+	protected void setProgressBasedOnAngle(float angle) {
 		mPointerPosition = angle;
 		calculateProgressDegrees();
 		mProgress = Math.round((float)mMax * mProgressDegrees / mTotalCircleDegrees);
 	}
 
-	private void recalculateAll() {
+	protected void recalculateAll() {
 		calculateTotalDegrees();
 		calculatePointerAngle();
 		calculateProgressDegrees();
@@ -850,7 +850,7 @@ public class CircularSeekBar extends View {
 		return true;
 	}
 
-	private void init(AttributeSet attrs, int defStyle) {
+	protected void init(AttributeSet attrs, int defStyle) {
 		final TypedArray attrArray = getContext().obtainStyledAttributes(attrs, R.styleable.CircularSeekBar, defStyle, 0);
 
 		initAttributes(attrArray);
