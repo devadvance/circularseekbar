@@ -355,9 +355,9 @@ public class CircularSeekBar extends View {
 	 */
 	protected OnCircularSeekBarChangeListener mOnCircularSeekBarChangeListener;
 
-
 	/**
-	 * 
+	 * True if user touch input is enabled, false if user touch input is ignored.
+	 * This does not affect setting values programmatically.
 	 */
 	protected boolean isTouchEnabled = true;
 
@@ -613,10 +613,18 @@ public class CircularSeekBar extends View {
 		recalculateAll();
 	}
 
+	/**
+	 * Get whether the pointer locks at zero and max.
+	 * @return Boolean value of true if the pointer locks at zero and max, false if it does not.
+	 */
 	public boolean isLockEnabled() {
 		return lockEnabled;
 	}
 
+	/**
+	 * Set whether the pointer locks at zero and max or not.
+	 * @param boolean value. True if the pointer should lock at zero and max, false if it should not.
+	 */
 	public void setLockEnabled(boolean lockEnabled) {
 		this.lockEnabled = lockEnabled;
 	}
@@ -852,6 +860,7 @@ public class CircularSeekBar extends View {
 		state.putInt("mPointerAlpha", mPointerAlpha);
 		state.putInt("mPointerAlphaOnTouch", mPointerAlphaOnTouch);
 		state.putBoolean("lockEnabled", lockEnabled);
+		state.putBoolean("isTouchEnabled", isTouchEnabled);
 
 		return state;
 	}
@@ -873,12 +882,12 @@ public class CircularSeekBar extends View {
 		mPointerAlpha = savedState.getInt("mPointerAlpha");
 		mPointerAlphaOnTouch = savedState.getInt("mPointerAlphaOnTouch");
 		lockEnabled = savedState.getBoolean("lockEnabled");
+		isTouchEnabled = savedState.getBoolean("isTouchEnabled");
 
 		initPaints();
 
 		recalculateAll();
 	}
-
 
 	public void setOnSeekBarChangeListener(OnCircularSeekBarChangeListener l) {
 		mOnCircularSeekBarChangeListener = l;
@@ -1053,11 +1062,19 @@ public class CircularSeekBar extends View {
 		return mMax;
 	}
 
-	public void setIsTouchEnabled(boolean value){
-		isTouchEnabled = value;
+	/**
+	 * Set whether user touch input is accepted or ignored.
+	 * @param boolean value. True if user touch input is to be accepted, false if user touch input is to be ignored.
+	 */
+	public void setIsTouchEnabled(boolean isTouchEnabled) {
+		this.isTouchEnabled = isTouchEnabled;
 	}
 
-	public boolean getIsTouchEnabled(){
+	/**
+	 * Get whether user touch input is accepted.
+	 * @return Boolean value of true if user touch input is accepted, false if user touch input is ignored.
+	 */
+	public boolean getIsTouchEnabled() {
 		return isTouchEnabled;
 	}
 
